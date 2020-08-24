@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::get('/foo', function() {
     return 'Hello World';
 });
+
+Route::get('/users', 'HomeController@getMethod');
+Route::post('/users', 'HomeController@postMethod');
+
+Route::post('/photos', 'PhotoController@store');
