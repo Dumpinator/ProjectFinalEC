@@ -20,4 +20,15 @@ Route::get('/foo', function() {
 Route::get('/users', 'HomeController@getMethod');
 Route::post('/users', 'HomeController@postMethod');
 
-Route::post('/photos', 'PhotoController@store');
+Route::post('/photos', 'PhotoController@store')->middleware('App\Http\Middleware\PhotoMiddleware');
+
+Route::get('/env', function() {
+    return response()->json([
+        'connection' => env('DB_CONNECTION'),
+        'host' => env('DB_HOST'),
+        'port' => env('DB_PORT'),
+        'database' => env('DB_DATABASE'),
+        'username' => env('DB_USERNAME'),
+        'password' => env('DB_PASSWORD'),
+    ]);
+});

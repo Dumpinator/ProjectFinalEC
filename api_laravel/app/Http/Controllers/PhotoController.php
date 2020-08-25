@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use stdClass;
+use App\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -49,12 +50,13 @@ class PhotoController extends Controller
             return response()->json(['errors' => $validator->errors()]);
         }
 
-        $photo = new stdClass();
+        Photo::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description')
+        ]);
 
-        $photo->title = $request->input('title');
-        $photo->description = $request->input('description');
 
-        return response()->json($photo);
+        return response()->json(['success' => 'Info enregistrées !']);
     }
 
     /**
