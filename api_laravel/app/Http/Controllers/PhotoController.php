@@ -16,9 +16,9 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
+        $photos = Photo::all();
+        return response()->json($photos);
     }
-
     /**
      * Show the form for creating a new resource.
      *

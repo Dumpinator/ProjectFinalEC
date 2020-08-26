@@ -13,15 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/foo', function() {
-    return 'Hello World';
-});
-
-Route::get('/users', 'HomeController@getMethod');
-Route::post('/users', 'HomeController@postMethod');
-
+Route::get('/photos', 'PhotoController@index');
 Route::post('/photos', 'PhotoController@store')->middleware('App\Http\Middleware\PhotoMiddleware');
 
+
+// Test connection BDD (check MAMP is ON)
 Route::get('/env', function() {
     return response()->json([
         'connection' => env('DB_CONNECTION'),
