@@ -2,33 +2,40 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 function Photos() {
-    const [photos, setPhotos] = useState([ ])
+    const [state, setState] = useState([])
+    const [hasError, setHasError] = useState (false)
+
+
 
     useEffect(() => {
-        const config = {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Accept': '*/*'
-        },
-        };
-        let request = axios.get('http://127.0.0.1:8000/api/photos', config)
-            .then(response => {
-                console.log(response.data);
-                //setPhotos(response.data);
-            });
-            /*
-        return () => {
-            request.then((res) => {
-                console.log(res);
-            }).catch((err) => {
-                console.log(err);
+        axios.get('http://127.0.0.1:8000/api/photos')
+            .then(res => setState(res.data))
+            .catch(err => {
+                console.log(err)
+                setHasError (true)
             })
-        }
-        */
-     }, []);
+    }, [])
 
+     /*
+     useEffect( () => {
+        const fetchData = async () => {
+            const result = await axios.get('http://127.0.0.1:8000/api/photos')
+            console.log(result.data);
+            setState(result.data)
+        };   
+        fetchData()
+     }, [])
+     */
+    console.log(state);
     return (
-        <>test photos : { photos } </>
+        <ul>
+            { hasError ? <div>Error occured.</div> : state.map(item => (
+                <li key={item.id}>
+                    <a href={item.url}>{item.title} : {item.description}</a>
+                </li>
+              ))
+            }
+        </ul>
     )
 }
 
