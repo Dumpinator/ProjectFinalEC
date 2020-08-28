@@ -1,30 +1,25 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
-import Welcome from './components/Welcome/Welcome'
-//import Car from './components/Car/Car'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import Home from './components/Home/Home'
 import Form from './components/Form/Form'
-import Photos from './components/Photos/Photos'
+//import Photos from './components/Photos/Photos'
+import Navbar from './components/Navbar/Navbar'
+import Register from './components/Register/Register'
+import Login from './components/Login/Login'
 
 function App() {
   return (
     <div className="App">
         <Router>
-          
-          <div>
-            <nav>
-              <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/photos">Photos</Link></li>
-                <li><Link to="/form">Form</Link></li>
-              </ul>
-            </nav>
-            <Switch>
-              <Route exact path="/" component={ Welcome } />
-              <Route path="/photos" component={ Photos } />
-              <Route path="/form" component={ Form } />
-            </Switch>
-          </div>
-
+            <Navbar/>
+            <div className="container w-50">
+              <Switch>
+                <Route exact path="/" component={ Home } />
+                <Route path="/form" component={ Form } />
+                <Route path="/register" component={ Register } />
+                <Route path="/login" component={ Login } />
+              </Switch>
+            </div>
         </Router>
     </div>
   )

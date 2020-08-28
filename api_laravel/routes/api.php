@@ -28,3 +28,6 @@ Route::get('/env', function() {
         'password' => env('DB_PASSWORD'),
     ]);
 });
+
+Route::post('/register', 'AuthenticationController@register');
+Route::post('/login', 'AuthenticationController@login');
