@@ -20,7 +20,7 @@ class AuthenticationController extends Controller
         ]);
 
         if($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()]);
+            return response()->json(['errors' => $validator->errors()], 401);
         }
 
         $user = User::create([
@@ -41,14 +41,14 @@ class AuthenticationController extends Controller
         ]);
 
         if($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()]);
+            return response()->json(['errors' => $validator->errors()], 401);
         }
         
         if(Auth::attempt(['email' => $request->input('email'),'password' => $request->input('password')])) {
             $user = User::where('email', $request->input('email'))->firstOrFail();
             return response()->json($user);
         } else {
-            return response()->json(['errors' => 'Wrong ID !']);
+            return response()->json(['errors' => 'Wrong ID !'], 401);
         }
     }
 }

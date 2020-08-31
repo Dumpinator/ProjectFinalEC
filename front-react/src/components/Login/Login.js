@@ -1,25 +1,61 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import axios from 'axios'
+
 
 function Login() {
 
-    const formik = useFormik({
-        initialValues: {
-            email: '',
-            password: ''
-        },
-        onSubmit: values => {
-            console.log('Login');
-            console.log('Form data', values);
-        },
-        validate: values => {
+    let history = useHistory();
 
+    const initialValues = {
+        email: '',
+        password: ''
+    }
+
+    const onSubmit = values => {
+        console.log('Form data', values)
+        
+        axios.post('http://127.0.0.1:8000/api/login', values)
+            .then(res => {
+                console.log('Connexion Réussi');
+                console.log(res.data)
+                history.push("/dashboard");
+            })
+            .catch(err => {
+                console.log(err.response.data.errors);
+                if(err.response.status === 401) {
+                    formik.setErrors({ server_error : err.response.data.errors })
+                }
+        })
+    }
+
+    const validate = values => {
+        let errors = {}
+    
+        if(!values.email) {
+            errors.email = 'Required'
         }
+        if(!values.email) {
+            errors.email = 'Required'
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/i.test(values.email)) {
+            errors.email = 'Invalid email format'
+        }
+        if(!values.password) {
+            errors.password = 'Required'
+        }
+        return errors
+    }
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit,
+        validate
     })
 
+    console.log(formik);
     return (
-        <form method='POST' onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} noValidate>
             <h2 className="text-center mt-5">Login</h2>
             <div className="form-group">
                 <label htmlFor="inputEmail">Email address</label>
@@ -29,8 +65,9 @@ function Login() {
                     id="inputEmail"
                     aria-describedby="emailHelp"
                     placeholder="Enter email"
-                    onChange={formik.handleChange}
+                    onChange={ formik.handleChange }
                     value={formik.values.email}/>
+                    { formik.errors.email ? <div className="invalid-feedback d-block">{ formik.errors.email }</div> : null }
             </div>
             <div className="form-group">
                 <label htmlFor="inputPassword">Password</label>
@@ -39,15 +76,16 @@ function Login() {
                     name='password'
                     id="inputPassword"
                     placeholder="Password"
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
+                    onChange={ formik.handleChange }
+                    value={ formik.values.password }
                 />
+                { formik.errors.password ? <div className="invalid-feedback d-block">{ formik.errors.password }</div> : null }
             </div>
                 <button type="submit" className="btn btn-primary">Login</button>
+                { formik.errors.server_error ? <div className="invalid-feedback d-block">{ formik.errors.server_error }</div> : null }
                 <p><Link to="/register">Go to Register</Link></p>
         </form>
     )
-    
 }
 
 export default Login

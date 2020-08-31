@@ -1,11 +1,11 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import { Link, Redirect, useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 function Register() {
     let history = useHistory();
-
+    
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -18,12 +18,13 @@ function Register() {
             console.log('Form data', values);
             axios.post('http://127.0.0.1:8000/api/register', values)
                 .then(res => {
+                    console.log('POST Réussi');
                     console.log(res.data)
                     localStorage.setItem('token', res.data.api_token)
                     history.push("/");
-
                 })
                 .catch(err => {
+                    console.log('POST échec');
                     console.log(err.response);
                 })
         }
@@ -81,7 +82,6 @@ function Register() {
             <p><Link to="/login">Go to Login</Link></p>
         </form>
     )
-    
 }
 
 export default Register
