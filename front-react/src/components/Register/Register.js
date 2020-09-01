@@ -6,28 +6,59 @@ import axios from 'axios'
 function Register() {
     let history = useHistory();
     
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-        },
-        onSubmit: values => {
-            console.log('Register');
-            console.log('Form data', values);
-            axios.post('http://127.0.0.1:8000/api/register', values)
-                .then(res => {
-                    console.log('POST Réussi');
-                    console.log(res.data)
-                    localStorage.setItem('token', res.data.api_token)
-                    history.push("/");
-                })
-                .catch(err => {
-                    console.log('POST échec');
-                    console.log(err.response);
-                })
+    const initialValues = {
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    }
+
+    const onSubmit = values => {
+        console.log('Form data', values);
+        axios.post('http://127.0.0.1:8000/api/register', values)
+            .then(res => {
+                //console.log('POST Réussi');
+                //console.log(res.data)
+                localStorage.setItem('token', res.data.api_token)
+                history.push("/");
+            })
+            .catch(err => {
+                //console.log(err.response.data.errors);
+                if(err.response.status === 401) {
+                    formik.setErrors({ server_error : err.response.data.errors })
+                }
+            })
+    }
+
+    const validate = values => {
+        let errors = {}
+        
+        if(!values.name) {
+            errors.name = 'Required'
         }
+        if(!values.email) {
+            errors.email = 'Required'
+        }
+        if(!values.email) {
+            errors.email = 'Required'
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/i.test(values.email)) {
+            errors.email = 'Invalid email format'
+        }
+        if(!values.password) {
+            errors.password = 'Required'
+        }
+        if(!values.confirmPassword) {
+            errors.confirmPassword = 'Required'
+        } else if (values.confirmPassword !== values.password)
+            errors.confirmPassword = 'Confirm your password with same'
+
+        return errors
+    }
+    
+    const formik = useFormik({
+        initialValues,
+        onSubmit,
+        validate
     })
 
     return (
@@ -44,6 +75,7 @@ function Register() {
                     onChange={formik.handleChange}
                     value={formik.values.name}
                 />
+                { formik.errors.name ? <div className="invalid-feedback d-block">{ formik.errors.name }</div> : null }
             </div>
             <div className="form-group">
                 <label htmlFor="inputEmail">Email address</label>
@@ -54,7 +86,9 @@ function Register() {
                     aria-describedby="emailHelp"
                     placeholder="Enter email"
                     onChange={formik.handleChange}
-                    value={formik.values.email}/>
+                    value={formik.values.email}
+                />
+                { formik.errors.email ? <div className="invalid-feedback d-block">{ formik.errors.email }</div> : null }
             </div>
             <div className="form-group">
                 <label htmlFor="inputPassword">Password</label>
@@ -66,6 +100,7 @@ function Register() {
                     onChange={formik.handleChange}
                     value={formik.values.password}
                 />
+                { formik.errors.password ? <div className="invalid-feedback d-block">{ formik.errors.password }</div> : null }
             </div>
             <div className="form-group">
                 <label htmlFor="inputConfirmPassword">Confirm password</label>
@@ -77,7 +112,9 @@ function Register() {
                     onChange={formik.handleChange}
                     value={formik.values.confirmPassword}
                 />
+                { formik.errors.confirmPassword ? <div className="invalid-feedback d-block">{ formik.errors.confirmPassword }</div> : null }
             </div>
+            { formik.errors.server_error ? <div className="alert alert-warning">{ formik.errors.server_error }</div> : null }
             <button type="submit" className="btn btn-primary">Register</button>
             <p><Link to="/login">Go to Login</Link></p>
         </form>

@@ -5,7 +5,6 @@ import axios from 'axios'
 
 
 function Login() {
-
     let history = useHistory();
 
     const initialValues = {
@@ -15,15 +14,15 @@ function Login() {
 
     const onSubmit = values => {
         console.log('Form data', values)
-        
         axios.post('http://127.0.0.1:8000/api/login', values)
             .then(res => {
-                console.log('Connexion Réussi');
-                console.log(res.data)
-                history.push("/dashboard");
+                //console.log('Connexion Réussi');
+                //console.log(res.data)
+                localStorage.setItem('token', res.data.api_token)
+                history.push("/dashboard")
             })
             .catch(err => {
-                console.log(err.response.data.errors);
+                //console.log(err.response.data.errors);
                 if(err.response.status === 401) {
                     formik.setErrors({ server_error : err.response.data.errors })
                 }
@@ -53,7 +52,6 @@ function Login() {
         validate
     })
 
-    console.log(formik);
     return (
         <form onSubmit={formik.handleSubmit} noValidate>
             <h2 className="text-center mt-5">Login</h2>
@@ -66,8 +64,9 @@ function Login() {
                     aria-describedby="emailHelp"
                     placeholder="Enter email"
                     onChange={ formik.handleChange }
-                    value={formik.values.email}/>
-                    { formik.errors.email ? <div className="invalid-feedback d-block">{ formik.errors.email }</div> : null }
+                    value={formik.values.email}
+                />
+                { formik.errors.email ? <div className="invalid-feedback d-block">{ formik.errors.email }</div> : null }
             </div>
             <div className="form-group">
                 <label htmlFor="inputPassword">Password</label>
@@ -81,8 +80,8 @@ function Login() {
                 />
                 { formik.errors.password ? <div className="invalid-feedback d-block">{ formik.errors.password }</div> : null }
             </div>
+                { formik.errors.server_error ? <div className="alert alert-warning">{ formik.errors.server_error }</div> : null }
                 <button type="submit" className="btn btn-primary">Login</button>
-                { formik.errors.server_error ? <div className="invalid-feedback d-block">{ formik.errors.server_error }</div> : null }
                 <p><Link to="/register">Go to Register</Link></p>
         </form>
     )
