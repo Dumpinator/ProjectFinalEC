@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Form extends Model
 {
-    //
+    protected $fillable = [
+        '1','2','3','4','5','6','7','8','9','10',
+        '11','12','13','14','15','16','17','18','19','20',
+        'url',
+    ];
+
+    public function getUser() {
+        return $this->belongsTo('App\User');
+    }
 }

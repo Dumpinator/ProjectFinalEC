@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 Route::get('/photos', 'PhotoController@index');
 Route::post('/photos', 'PhotoController@store')->middleware('App\Http\Middleware\PhotoMiddleware');
 
+Route::get('/forms', 'FormController@index');
+Route::post('/forms', 'FormController@store');
 
 // Test connection BDD (check MAMP is ON)
 Route::get('/env', function() {

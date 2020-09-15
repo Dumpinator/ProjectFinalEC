@@ -9,18 +9,21 @@ function Form() {
         {
             id: 1,
             type: 'b',
-            text: 'Votre adresse mail'
+            text: 'Votre adresse mail',
+            target: 'email'
         },
         {
             id: 2,
             type: 'b',
-            text: 'Votre âge'
+            text: 'Votre âge',
+            target: 'age'
         },
         {
             id: 3,
             type: 'a',
             text: 'Votre sexe',
-            multipleChoice: ['Homme','Femme','Préfère de pas répondre']
+            multipleChoice: ['Homme','Femme','Préfère de pas répondre'],
+            target: 'sexe'
         },
         {
             id: 4,
@@ -31,7 +34,8 @@ function Form() {
         {
             id: 5,
             type: 'b',
-            text: 'Votre profession'
+            text: 'Votre profession',
+            target: 'work'
         },
         {
             id: 6,
@@ -121,6 +125,7 @@ function Form() {
             id: 20,
             type: 'b',
             text: 'Quelle nouvelle fonctionnalité de vos rêve devrait exister sur Bigscreen ?',
+            target: 'fonctionality'
         }
     ]);
 

@@ -20,10 +20,10 @@ function Register() {
                 //console.log('POST Réussi');
                 //console.log(res.data)
                 localStorage.setItem('token', res.data.api_token)
-                history.push("/");
+                history.push("/forms");
             })
             .catch(err => {
-                //console.log(err.response.data.errors);
+                console.log(err);
                 if(err.response.status === 401) {
                     formik.setErrors({ server_error : err.response.data.errors })
                 }
