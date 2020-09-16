@@ -19,7 +19,7 @@ class CreateFormsTable extends Migration
             $table->string('2', 170);
             $table->string('3', 170);
             $table->string('4', 170);
-            $table->string('url', 60)->nullable()->unique();
+            $table->string('url', 60)->unique();
             $table->timestamps();
         });
 

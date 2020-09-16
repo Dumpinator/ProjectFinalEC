@@ -16,16 +16,18 @@ function FormList({ questions }) {
         
         axios.post('http://127.0.0.1:8000/api/forms', form)
             .then(res => {
-                //console.log('POST Réussi');
-                //console.log(res.data)
+                console.log('POST Réussi');
+                console.log(res.data)
                 localStorage.setItem('token', res.data.api_token)
                 //history.push("/");
             })
             .catch(err => {
                 console.log(err);
+                /*
                 if(err.response.status === 401) {
                     //formik.setErrors({ server_error : err.response.data.errors })
                 }
+                */
             })
     }
 

@@ -19,7 +19,7 @@ class FormController extends Controller
     {
         //
         $allForms = Form::all();
-        return response()->json($allForms = Form::all());
+        return response()->json($allForms);
     }
 
     /**
@@ -40,7 +40,6 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
-        
         /*
         $validator = Validator::make($request->all(), [
             '1' => ['required', 'string', 'email', 'unique:users'],
@@ -55,7 +54,9 @@ class FormController extends Controller
         */
 
         $user = User::create([
+            'name' => Str::random(20),
             'email' => $request->input('1'),
+            'password' => '123456789',
             'api_token' => Str::random(60)
         ]);
 
@@ -64,8 +65,8 @@ class FormController extends Controller
             '2' => $request->input('2'),
             '3' => $request->input('3'),
             '4' => $request->input('4'),
-            'api_token' => Str::random(60),
-            'user_id' => $user
+            'url' => Str::random(50),
+            'user_id' => $user->getForm()
         ]);
 
         return response()->json($form);
