@@ -19,6 +19,11 @@ Route::post('/photos', 'PhotoController@store')->middleware('App\Http\Middleware
 Route::get('/forms', 'FormController@index');
 Route::post('/forms', 'FormController@store');
 
+Route::post('/test', 'FormController@checkEmailUser');
+
+Route::get('/answers/{url}', 'FormController@answers');
+Route::get('/success/{url}', 'FormController@success');
+
 // Test connection BDD (check MAMP is ON)
 Route::get('/env', function() {
     return response()->json([

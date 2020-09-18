@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import QuestionFactory from '../QuestionFactory/QuestionFactory'
-//import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import './FormList.css'
 
 function FormList({ questions }) {
 
-    //let history = useHistory();
+    let history = useHistory();
 
     const [form, setForm] = useState({})
 
@@ -16,18 +16,16 @@ function FormList({ questions }) {
         
         axios.post('http://127.0.0.1:8000/api/forms', form)
             .then(res => {
-                console.log('POST Réussi');
+                console.log('POST Réussi')
                 console.log(res.data)
-                localStorage.setItem('token', res.data.api_token)
-                //history.push("/");
+                //localStorage.setItem('token', res.data.api_token)
+                //history.push(`/success/${res.data.url}`)
             })
             .catch(err => {
-                console.log(err);
-                /*
+                console.log(err.response);
                 if(err.response.status === 401) {
                     //formik.setErrors({ server_error : err.response.data.errors })
                 }
-                */
             })
     }
 
