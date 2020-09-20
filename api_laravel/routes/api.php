@@ -13,16 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/photos', 'PhotoController@index');
-Route::post('/photos', 'PhotoController@store')->middleware('App\Http\Middleware\PhotoMiddleware');
+//Route::get('/photos', 'PhotoController@index');
+//Route::post('/photos', 'PhotoController@store')->middleware('App\Http\Middleware\PhotoMiddleware');
 
-Route::get('/forms', 'FormController@index');
-Route::post('/forms', 'FormController@store');
+Route::post('/answers', 'AnswerController@store');
+//Route::get('/success/{url}', 'Form1Controller@success');
 
-Route::post('/test', 'FormController@checkEmailUser');
-
-Route::get('/answers/{url}', 'FormController@answers');
-Route::get('/success/{url}', 'FormController@success');
+Route::get('/form', 'Form1Controller@index');
 
 // Test connection BDD (check MAMP is ON)
 Route::get('/env', function() {

@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Form;
-use App\User;
-use Illuminate\Support\Str;
+use App\Answer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
-class FormController extends Controller
+class AnswerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,24 +16,6 @@ class FormController extends Controller
     public function index()
     {
         //
-        $allForms = Form::all();
-        return response()->json($allForms);
-    }
-
-    public function success()
-    {
-        //
-        //$form = DB::table('forms')->where('url', $user->email)->first();
-        $allForms = Form::all();
-        return response()->json($allForms);
-    }
-
-    public function answers($url)
-    {
-
-        $result = DB::table('forms')->where('url', $url)->first();
-        return response()->json($result);
-
     }
 
     /**
@@ -49,20 +28,6 @@ class FormController extends Controller
         //
     }
 
-    public function checkEmailUser(Request $request)
-    {
-        $email = $request->input('1');
-        if( strlen( $email ) > 0 ) {
-            $userResult = DB::table('users')->where('email', $email)->first();
-            if ( is_object($userResult) && !is_null($userResult) ) {
-                return response()->json($userResult, 200);
-            } else {
-                return response()->json(['errors' => 'Email No Exist'], 404);
-            }
-        }
-        return response()->json(['errors' => 'Merci de rentré un email valide'], 404);
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -71,17 +36,16 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $email = $request->input('1');
 
         if( strlen( $email ) > 0 ) {
-
             // check si l'email existe bien en base
             $userExist = DB::table('users')->where('email', $email)->first();
 
             if ( is_object($userExist) && !is_null($userExist) ) {
                 
-                $form = Form::create([
+                $answer = Answer::create([
 
                     '1' => $userExist->email,
                     '2' => $request->input('2'),
@@ -103,11 +67,11 @@ class FormController extends Controller
                     '18' => $request->input('18'),
                     '19' => $request->input('19'),
                     '20' => $request->input('20'),
-                    'url' => $userExist->api_token,
+                    'user_url' => $userExist->url,
                     'user_id' => $userExist->id
                 ]);
 
-                return response()->json([$form, $userExist], 200);
+                return response()->json([$answer, $userExist], 200);
             } else {
                 return response()->json(['errors' => 'Email No Exist'], 404);
             }
@@ -136,8 +100,7 @@ class FormController extends Controller
      */
     public function show($id)
     {
-        $result = DB::table('forms')->where('user_id', $id)->first();
-        return response()->json($result);
+        //
     }
 
     /**

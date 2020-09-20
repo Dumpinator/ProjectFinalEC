@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use stdClass;
-use App\Photo;
+use App\Form;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
-class PhotoController extends Controller
+class Form1Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,11 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $photos = Photo::all();
-        return response()->json($photos);
+        //
+        $allForm = Form::all();
+        return response()->json($allForm);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -37,26 +38,7 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required | max:10',
-            'description' => 'required | min:15'
-        ], [
-            'title.required' => 'Le titre est obligatoire !',
-            'description.required' => 'La description est obligatoire !'
-        ]);
-
-
-        if($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()]);
-        }
-
-        Photo::create([
-            'title' => $request->input('title'),
-            'description' => $request->input('description')
-        ]);
-
-
-        return response()->json(['success' => 'Info enregistrées !']);
+        //
     }
 
     /**

@@ -2,38 +2,37 @@ import React from 'react'
 import './QuestionFactory.css'
 
 function QuestionFactory({question, handleChangeValue}) {
-  
-    const questiontype = question.type;
-   
-    if (questiontype === 'b')
+    
+    //console.log(question);
+    const type = question.type;
+    const option = question.option?.split(',')
+
+    if (type === 'B')
         return (
             <div className="form-group">
                 <label className="float-right">{ question.id } sur 20</label>
-                <label className="questions-text" htmlFor="exampleFormControlInput1">{ question.text }</label>
-                <input onChange={(e) => handleChangeValue(e)} type="text" className="form-control" id={ question.id } name={ question.id } placeholder=""/>
+                <label className="questions-label" htmlFor="exampleFormControlInput1">{ question.label }</label>
+                <input onChange={(e) => handleChangeValue(e)} type="label" className="form-control" id={ question.id } name={ question.id } placeholder=""/>
             </div>
         )
-    else if (questiontype === 'a') {
+    else if (type === 'A') {
         return (
             <div className="form-group">
                 <label className="float-right">{ question.id } sur 20</label>
-                <label className="questions-text" htmlFor="exampleFormControlSelect1">{ question.text }</label>
+                <label className="questions-label" htmlFor="exampleFormControlSelect1">{ question.label }</label>
                 <select size={3} onChange={(e) => handleChangeValue(e)} className="form-control" id={ question.id }>
-                    { question.multipleChoice?.map( (item, i) => 
-                        <option key={i} value={i+1}>{ item }</option> 
-                    ) }
+                    { option?.map( (item, i) => <option key={i} value={ item }>{ item }</option> ) }
                 </select>
             </div>
         )
     }
-    else if (questiontype === 'c')
+    else if (type === 'C')
         return (
             <div className="form-group">
                 <label className="float-right">{ question.id } sur 20</label>
-                <label className="questions-text" htmlFor="exampleFormControlSelect2">{ question.text }</label>
-                <select size={5} onChange={(e) => handleChangeValue(e)} className="form-control" id={ question.id }
-                >
-                    { question.multipleChoice?.map( (item, i) => <option key={i} value={i+1}>{ item }</option> ) }
+                <label className="questions-label" htmlFor="exampleFormControlSelect2">{ question.label }</label>
+                <select size={5} onChange={(e) => handleChangeValue(e)} className="form-control" id={ question.id }>
+                    { option?.map( (item, i) => <option key={i} value={i+1}>{ item }</option> ) }
                 </select>
             </div>
         )
