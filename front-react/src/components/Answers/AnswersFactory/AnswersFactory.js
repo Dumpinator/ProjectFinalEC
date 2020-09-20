@@ -1,7 +1,7 @@
 import React from 'react'
 import './AnswersFactory.css'
 
-function AnswersFactory({ question, answers }) {
+function AnswersFactory({ question, answer }) {
 
     const type = question.type;
 
@@ -10,7 +10,7 @@ function AnswersFactory({ question, answers }) {
             <div className="form-group">
                 <label className="float-right">{question.id} sur 20</label>
                 <label className="questions-label" htmlFor="exampleFormControlInput1">{question.label}</label>
-                <p>{ answers[`${question.id}`] }</p>
+                <p>{ answer[`${question.id}`] }</p>
             </div>
         )
     else if (type === 'A') {
@@ -18,7 +18,7 @@ function AnswersFactory({ question, answers }) {
             <div className="form-group">
                 <label className="float-right">{question.id} sur 20</label>
                 <label className="questions-label" htmlFor="exampleFormControlSelect1">{question.label}</label>
-                <p>{answers[`${question.id}`]}</p>
+                <p>{answer[`${question.id}`]}</p>
             </div>
         )
     }
@@ -27,7 +27,7 @@ function AnswersFactory({ question, answers }) {
             <div className="form-group">
                 <label className="float-right">{question.id} sur 20</label>
                 <label className="questions-label" htmlFor="exampleFormControlSelect2">{question.label}</label>
-                <p>{answers[`${question.id}`]}</p>
+                <p>{answer[`${question.id}`]}</p>
             </div>
         )
     else

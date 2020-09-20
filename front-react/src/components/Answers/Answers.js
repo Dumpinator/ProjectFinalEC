@@ -43,7 +43,7 @@ function Answers() {
             { fetchData.map((questions, i) =>
                 <AnswersFactory 
                     question={questions}
-                    answers={userData}
+                    answer={userData}
                     key={i}
                 />)
             }
