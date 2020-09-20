@@ -2,8 +2,7 @@ import React from 'react'
 import './QuestionFactory.css'
 
 function QuestionFactory({question, handleChangeValue}) {
-    
-    //console.log(question);
+
     const type = question.type;
     const option = question.option?.split(',')
 

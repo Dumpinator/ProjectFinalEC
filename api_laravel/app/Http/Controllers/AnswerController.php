@@ -28,6 +28,12 @@ class AnswerController extends Controller
         //
     }
 
+    public function success($url)
+    {
+        $result = DB::table('forms')->where('url', $url)->first();
+        return response()->json($result);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -98,9 +104,11 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($url)
     {
         //
+        $result = DB::table('answers')->where('user_url', $url)->first();
+        return response()->json($result);
     }
 
     /**

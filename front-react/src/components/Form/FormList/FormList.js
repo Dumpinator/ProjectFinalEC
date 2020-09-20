@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import QuestionFactory from '../QuestionFactory/QuestionFactory'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import './FormList.css'
 
 function FormList() {
 
-    let history = useHistory();
+    let history = useHistory()
+    
 
     const [form, setForm] = useState({})
     const [fetchData, setFetchData] = useState([])
     const [errors, setErrors] = useState([])
-    
-    const url = 'http://localhost:8000/api/form'
 
     useEffect(() => {
-
         const fetachData = async () => {
-            axios.get(url)
+            axios.get(`http://localhost:8000/api/form`)
                 .then(res => {
                     console.log('LOG : ', res.data)
                     setFetchData(res.data)
                 })
                 .catch(err => console.log(err.response))
-
-                //setFetchData(result.data)
-            }
-            fetachData()
-        }, [url])
+        }
+        fetachData()
+    }, [])
 
         const handleSubmit = event => {
         event.preventDefault()
@@ -35,10 +31,9 @@ function FormList() {
 
             axios.post('http://127.0.0.1:8000/api/answers', form)
             .then(res => {
-                console.log('POST Réussi')
-                console.log(res.data)
-                //localStorage.setItem('token', res.data.api_token)
-                //history.push(`/success/${res.data.url}`)
+                console.log(res.data[1].url)
+                localStorage.setItem('url', res.data[1].url)
+                history.push(`/success/${res.data[1].url}`)
             })
             .catch(err => {
                 console.log(err.response);

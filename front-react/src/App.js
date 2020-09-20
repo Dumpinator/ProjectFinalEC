@@ -18,10 +18,11 @@ function App() {
                 <Route exact path="/" component={ Home } />
                 <Route path="/form" component={ Form } />
                 <Route exact path="/answers/:url" component={ Answers } />
-                <Route path="/success/:url" component={ Success } />
+                <Route exact path="/success/:url" component={ Success } />
                 <Route path="/register" component={ Register } />
                 <Route path="/login" component={ Login } />
                 <Route path="/dashboard" component={ Dashboard } />
+                <Route render={() => <h1>404: page not found</h1>} />
               </Switch>
             </div>
         </Router>

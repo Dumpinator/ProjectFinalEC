@@ -15,9 +15,8 @@ class Form1Controller extends Controller
      */
     public function index()
     {
-        //
-        $allForm = Form::all();
-        return response()->json($allForm);
+        $allQuestion = Form::all();
+        return response()->json($allQuestion);
     }
 
     /**

@@ -17,7 +17,9 @@ use Illuminate\Http\Request;
 //Route::post('/photos', 'PhotoController@store')->middleware('App\Http\Middleware\PhotoMiddleware');
 
 Route::post('/answers', 'AnswerController@store');
-//Route::get('/success/{url}', 'Form1Controller@success');
+
+Route::get('/success/{url}', 'AnswerController@success');
+Route::get('/answers/{url}', 'AnswerController@show');
 
 Route::get('/form', 'Form1Controller@index');
 
