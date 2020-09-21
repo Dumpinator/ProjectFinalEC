@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'url'
+        'name', 'email', 'password', 'url', 'remember_token'
     ];
 
     /**
@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'user_types'
+        'password', 'user_types'
     ];
 
     /**
@@ -37,5 +37,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //public function getForm() {}
+    //public function getAnswer() {}
 }

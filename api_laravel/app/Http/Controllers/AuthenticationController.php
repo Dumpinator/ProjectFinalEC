@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class AuthenticationController extends Controller
 {
     public function register(Request $request) {
-
+        
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:25', 'min:4'],
             'email' => ['required', 'string', 'email' , 'max:150', 'min:3', 'unique:users'],
@@ -22,12 +22,13 @@ class AuthenticationController extends Controller
         if($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 401);
         }
-
+        
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'api_token' => Str::random(60)
+            'url' => Str::random(60),
+            'remember_token' => Str::random(60)
         ]);
 
         return response()->json($user);
@@ -46,7 +47,10 @@ class AuthenticationController extends Controller
 
         if(Auth::attempt(['email' => $request->input('email'),'password' => $request->input('password')])) {
             $user = User::where('email', $request->input('email'))->firstOrFail();
-            return response()->json($user);
+            if($user->user_types === 'admin')
+                return response()->json($user);
+            else
+                return response()->json(['errors' => 'Only admin can connect !'], 401);
         } else {
             return response()->json(['errors' => 'Wrong ID !'], 401);
         }

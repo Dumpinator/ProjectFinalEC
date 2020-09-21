@@ -18,15 +18,16 @@ function Register() {
         axios.post('http://127.0.0.1:8000/api/register', values)
             .then(res => {
                 //console.log('POST Réussi');
-                //console.log(res.data)
-                localStorage.setItem('token', res.data.api_token)
-                history.push("/forms");
+                console.log(res.data)
+                history.push("/dashboard");
             })
             .catch(err => {
-                console.log(err);
+                console.log(err.response.message)
+                /*
                 if(err.response.status === 401) {
                     formik.setErrors({ server_error : err.response.data.errors })
                 }
+                */
             })
     }
 

@@ -2,15 +2,13 @@ import React, { useState } from 'react'
 import { Link, useHistory } from "react-router-dom"
 
 function Navbar() {
-    
-    let history = useHistory();
-    
+
+    let history = useHistory()
     const [, removeToken] = useState(false)
-    
-    const logoutTest = () => {
+    const logout = () => {
         localStorage.clear()
         removeToken(true)
-        history.push("/login")
+        history.push("/")
     }
 
     return (
@@ -27,7 +25,7 @@ function Navbar() {
                         ?
                         <>
                             <li className="nav-item active">
-                                <button className="nav-btn" onClick={logoutTest}>Déconnexion</button>
+                                <button className="nav-btn" onClick={logout}>Déconnexion</button>
                             </li>
                         </>
                         :
@@ -36,7 +34,7 @@ function Navbar() {
                                 <Link className="nav-link" to="/form">Formulaire</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/register">Connexion</Link>
+                                <Link className="nav-link" to="/login">Connexion</Link>
                             </li>
                         </>
                     }
@@ -44,7 +42,6 @@ function Navbar() {
             </div>
         </nav>
     )
-    
 }
 
 export default Navbar

@@ -1,25 +1,27 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios'
 
-
 function Login() {
-    let history = useHistory();
-
+    
+    let history = useHistory()
+    let location = useLocation()
+    let { from } = location.state || { from: { pathname: "/dashboard" } }
+    
     const initialValues = {
         email: '',
         password: ''
     }
 
     const onSubmit = values => {
-        console.log('Form data', values)
+        //console.log('Form data', values)
         axios.post('http://127.0.0.1:8000/api/login', values)
             .then(res => {
                 //console.log('Connexion Réussi');
-                //console.log(res.data)
-                localStorage.setItem('token', res.data.api_token)
-                history.push("/dashboard")
+                console.log(res.data)
+                localStorage.setItem('token', res.data.remember_token)
+                history.replace(from)
             })
             .catch(err => {
                 //console.log(err.response.data.errors);

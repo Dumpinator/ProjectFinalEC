@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import QuestionFactory from '../QuestionFactory/QuestionFactory'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import './FormList.css'
 
 function FormList() {
 
     let history = useHistory()
-    
 
     const [form, setForm] = useState({})
     const [fetchData, setFetchData] = useState([])
-    const [errors, setErrors] = useState([])
+    //const [errors, setErrors] = useState([])
 
     useEffect(() => {
         const fetachData = async () => {

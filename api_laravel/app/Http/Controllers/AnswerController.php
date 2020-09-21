@@ -15,7 +15,8 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        //
+        $allResults = Answer::all();
+        return response()->json($allResults);
     }
 
     /**
