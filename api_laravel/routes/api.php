@@ -17,6 +17,8 @@ Route::post('/answers', 'AnswerController@store');
 Route::get('/answers', 'AnswerController@index');
 Route::get('/answers/{url}', 'AnswerController@show');
 
+Route::get('/charts', 'AnswerController@charts');
+
 Route::get('/success/{url}', 'AnswerController@success');
 
 Route::get('/form', 'Form1Controller@index');

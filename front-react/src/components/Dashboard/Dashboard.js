@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link, Switch, Route } from "react-router-dom"
 import Navbar from '../Navbar/Navbar'
-import Chart from './Chart/Chart'
 import Form from './Form/Form'
+import Chart from './Chart/Chart'
 import AnswerForm from './AnswerForm/AnswerForm'
 import { FcPieChart, FcSurvey, FcAcceptDatabase } from 'react-icons/fc';
 import './Dashboard.css'
@@ -42,7 +42,6 @@ function Dashboard() {
                             </li>
                             <li>
                                 <button className="collapse-btn" aria-expanded="true" aria-label="collapse menu">
-                                    <span>Collapse</span>
                                 </button>
                             </li>
                         </ul>

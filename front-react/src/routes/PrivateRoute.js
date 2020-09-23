@@ -1,5 +1,7 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
+
+// TODO check le token en BDD
 const isAuthenticated = localStorage.getItem('token');
 
 const PrivateRoute = ({ children, ...rest }) => {

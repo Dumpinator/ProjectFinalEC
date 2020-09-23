@@ -19,6 +19,11 @@ class AnswerController extends Controller
         return response()->json($allResults);
     }
 
+    public function charts()
+    {
+        $result = DB::Table('answers')->select('6','7','10','11','12','13','14','15')->get();
+        return response()->json($result);
+    }
     /**
      * Show the form for creating a new resource.
      *

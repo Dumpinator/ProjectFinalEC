@@ -1,0 +1,40 @@
+
+/*In case you prefer an absolutely positioned header that covers the full page height, add these styles*/
+/*body {
+  position: relative;
+}
+
+.page-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}*/
+
+/*remove these styles*/
+/*.page-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+}*/
+
+/* PAGE CONTENT STYLES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/*
+.page-content .grid > test {
+  display: flex;
+  height: 300px;
+  background: var(--page-content-blockColor);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+*/
+@media screen and (max-width: 400px) {
+  .page-content .grid > test {
+    grid-column: 1 / -1;
+  }
+}

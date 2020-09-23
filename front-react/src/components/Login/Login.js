@@ -6,8 +6,8 @@ import axios from 'axios'
 function Login() {
     
     let history = useHistory()
-    let location = useLocation()
-    let { from } = location.state || { from: { pathname: "/dashboard" } }
+    //let location = useLocation()
+    //let { from } = location.state || { from: { pathname: "/dashboard/charts" } }
     
     const initialValues = {
         email: '',
@@ -21,7 +21,7 @@ function Login() {
                 //console.log('Connexion Réussi');
                 console.log(res.data)
                 localStorage.setItem('token', res.data.remember_token)
-                history.replace(from)
+                history.push('/dashboard/chart')
             })
             .catch(err => {
                 //console.log(err.response.data.errors);

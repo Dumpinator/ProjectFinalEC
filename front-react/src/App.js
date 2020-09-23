@@ -7,7 +7,7 @@ import Register from './components/Register/Register'
 import Dashboard from './components/Dashboard/Dashboard'
 import Success from './components/Success/Success'
 import Login from './components/Login/Login'
-import PrivateRoute from './routers/PrivateRoute'
+import PrivateRoute from './routes/PrivateRoute'
 
 function App() {
 
@@ -21,7 +21,7 @@ function App() {
                 <Route exact path="/success/:url" component={ Success } />
                 <Route path="/register" component={ Register } />
                 <Route path="/login" component={ Login } />
-                <PrivateRoute path="/dashboard">
+                <PrivateRoute path="/dashboard/">
                   <Dashboard />
                 </PrivateRoute>
                 <Route render={() => <h1>404: page not found</h1>} />
