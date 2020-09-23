@@ -77,9 +77,6 @@ body {
 }
 
 /*In case you prefer an absolutely positioned header that covers the full page height, add these styles*/
-body {
-  position: relative;
-}
 
 .page-header {
   position: absolute;
@@ -91,17 +88,6 @@ body {
 .page-header nav > h3 {
   text-align: center;
 }
-/**/
-
-/*remove these styles*/
-/*.page-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: auto;
-}*/
 
 .page-header nav {
   display: flex;

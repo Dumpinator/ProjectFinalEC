@@ -10,7 +10,7 @@ function FormList() {
 
     const [form, setForm] = useState({})
     const [fetchData, setFetchData] = useState([])
-    //const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState([])
 
     useEffect(() => {
         const fetachData = async () => {
@@ -27,19 +27,19 @@ function FormList() {
         const handleSubmit = event => {
         event.preventDefault()
         console.log('Form data', form)
-
-            axios.post('http://127.0.0.1:8000/api/answers', form)
-            .then(res => {
-                console.log(res.data[1].url)
-                localStorage.setItem('url', res.data[1].url)
-                history.push(`/success/${res.data[1].url}`)
-            })
-            .catch(err => {
-                console.log(err.response);
-                if(err.response.status === 401) {
-                    //formik.setErrors({ server_error : err.response.data.errors })
-                }
-            })
+        axios.post('http://127.0.0.1:8000/api/answers', form)
+        .then(res => {
+            //console.log(res.data[1].url)
+            localStorage.setItem('url', res.data[1].url)
+            history.push(`/success/${res.data[1].url}`)
+        })
+        .catch(err => {
+            //console.log(err.response.data);
+            if (err.response.data.message)
+                setErrors({ server_error: 'Erreur MySQL'})
+            else 
+                setErrors({ server_error : err.response.data.errors })
+        })
     }
 
     const handleChangeValue = event => {
@@ -48,7 +48,7 @@ function FormList() {
     }
 
     return (
-        <>
+        <>  
             <form onSubmit={handleSubmit} className="form-div">
                 { 
                     fetchData.map( (question, i) => 
@@ -60,7 +60,8 @@ function FormList() {
                     )
                 }
                 <div className="text-center">
-                    <button className="btn" type="submit">Envoyer le formulaire</button>
+                    { errors.server_error ? <div className="alert alert-warning">{errors.server_error}</div> : null }
+                    <button className="btn btn-primary" type="submit">Envoyer</button>
                 </div>
             </form>
         </>

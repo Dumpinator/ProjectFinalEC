@@ -1,3 +1,14 @@
 .form-div {
     padding: 2em;
+    margin: 2em 5em 0 5em;
+    text-align: center;
+
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+.form-div > .form-group {
+    margin: 2em 1em;
+    padding: 2em 1em;
+    border-radius: 15px;
 }

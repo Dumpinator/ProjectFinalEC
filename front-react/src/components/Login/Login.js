@@ -1,25 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
+import './Login.css'
 
 function Login() {
     
     let history = useHistory()
-    
+    const [, setRedirect] = useState([false])
     const initialValues = {
         email: '',
         password: ''
     }
 
-    const onSubmit = values => {
+    const onSubmit = async values => {
         //console.log('Form data', values)
         axios.post('http://127.0.0.1:8000/api/login', values)
             .then(res => {
                 //console.log('Connexion Réussi');
-                console.log(res.data)
+                //console.log(res.data)
                 localStorage.setItem('token', res.data.remember_token)
                 history.push('/dashboard/chart')
+                setRedirect([null])
             })
             .catch(err => {
                 //console.log(err.response.data.errors);
@@ -53,37 +55,43 @@ function Login() {
     })
 
     return (
-        <form onSubmit={formik.handleSubmit} noValidate>
-            <h2 className="text-center mt-5">Login</h2>
-            <div className="form-group">
-                <label htmlFor="inputEmail">Email address</label>
-                <input type="email" 
-                    className="form-control"
-                    name='email'
-                    id="inputEmail"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter email"
-                    onChange={ formik.handleChange }
-                    value={formik.values.email}
-                />
-                { formik.errors.email ? <div className="invalid-feedback d-block">{ formik.errors.email }</div> : null }
+        <>
+            <div className="page-login">
+                <div className="login">
+                    <form onSubmit={formik.handleSubmit} noValidate>
+                        <h2>LOGIN</h2>
+                        <div className="form-group">
+                            <label htmlFor="inputEmail"></label>
+                            <input type="email" 
+                                className="form-control"
+                                name='email'
+                                id="inputEmail"
+                                aria-describedby="emailHelp"
+                                placeholder="Email"
+                                onChange={ formik.handleChange }
+                                value={formik.values.email}
+                            />
+                            { formik.errors.email ? <div className="invalid-feedback d-block">{ formik.errors.email }</div> : null }
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="inputPassword"></label>
+                            <input type="password"
+                                className="form-control"
+                                name='password'
+                                id="inputPassword"
+                                placeholder="Password"
+                                onChange={ formik.handleChange }
+                                value={ formik.values.password }
+                            />
+                            { formik.errors.password ? <div className="invalid-feedback d-block">{ formik.errors.password }</div> : null }
+                        </div>
+                            { formik.errors.server_error ? <div className="alert alert-warning">{ formik.errors.server_error }</div> : null }
+                            <button type="submit" className="btn btn-primary">Enter</button>
+                            <p><Link to="/register">Go to Register</Link></p>
+                    </form>
+                </div>
             </div>
-            <div className="form-group">
-                <label htmlFor="inputPassword">Password</label>
-                <input type="password"
-                    className="form-control"
-                    name='password'
-                    id="inputPassword"
-                    placeholder="Password"
-                    onChange={ formik.handleChange }
-                    value={ formik.values.password }
-                />
-                { formik.errors.password ? <div className="invalid-feedback d-block">{ formik.errors.password }</div> : null }
-            </div>
-                { formik.errors.server_error ? <div className="alert alert-warning">{ formik.errors.server_error }</div> : null }
-                <button type="submit" className="btn btn-primary">Login</button>
-                <p><Link to="/register">Go to Register</Link></p>
-        </form>
+        </>
     )
 }
 

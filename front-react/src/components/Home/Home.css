@@ -1,0 +1,30 @@
+.page-home {
+    height: 94vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    width: 30%;
+    border-radius: 15px;
+    padding: 15px 0;
+}
+
+.home > .jumbotron > .icon {
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+    color: silver;
+}
+
+.home > .jumbotron > .icon svg {
+    font-size: 2em;
+}
+
+.home > .jumbotron > .estimation {
+    color: silver;
+}

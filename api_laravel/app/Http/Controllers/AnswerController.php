@@ -58,7 +58,6 @@ class AnswerController extends Controller
             if ( is_object($userExist) && !is_null($userExist) ) {
                 
                 $answer = Answer::create([
-
                     '1' => $userExist->email,
                     '2' => $request->input('2'),
                     '3' => $request->input('3'),

@@ -2,6 +2,7 @@ import React from 'react'
 import { useFormik } from 'formik'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
+import './Register.css'
 
 function Register() {
     let history = useHistory();
@@ -63,62 +64,68 @@ function Register() {
     })
 
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <h2 className="text-center mt-5">Register</h2>
-            <div className="form-group">
-                <label htmlFor="inputName">Name</label>
-                <input  type="text"
-                    className="form-control" 
-                    name='name' 
-                    id="inputName" 
-                    aria-describedby="nameHelp" 
-                    placeholder="Enter name"
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
-                />
-                { formik.errors.name ? <div className="invalid-feedback d-block">{ formik.errors.name }</div> : null }
+        <>
+            <div className="page-register">
+                <div className="register">
+                    <form onSubmit={formik.handleSubmit}>
+                        <h2 className="text-center mt-5">REGISTER</h2>
+                        <div className="form-group">
+                            <label htmlFor="inputName"></label>
+                            <input  type="text"
+                                className="form-control" 
+                                name='name' 
+                                id="inputName" 
+                                aria-describedby="nameHelp" 
+                                placeholder="Enter name"
+                                onChange={formik.handleChange}
+                                value={formik.values.name}
+                            />
+                            { formik.errors.name ? <div className="invalid-feedback d-block">{ formik.errors.name }</div> : null }
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="inputEmail"></label>
+                            <input type="email" 
+                                className="form-control"
+                                name='email'
+                                id="inputEmail"
+                                aria-describedby="emailHelp"
+                                placeholder="Enter email"
+                                onChange={formik.handleChange}
+                                value={formik.values.email}
+                            />
+                            { formik.errors.email ? <div className="invalid-feedback d-block">{ formik.errors.email }</div> : null }
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="inputPassword"></label>
+                            <input type="password"
+                                className="form-control"
+                                name='password'
+                                id="inputPassword"
+                                placeholder="Password"
+                                onChange={formik.handleChange}
+                                value={formik.values.password}
+                            />
+                            { formik.errors.password ? <div className="invalid-feedback d-block">{ formik.errors.password }</div> : null }
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="inputConfirmPassword"></label>
+                            <input type="password"
+                                className="form-control"
+                                name='confirmPassword'
+                                id="inputConfirmPassword"
+                                placeholder="Confirm password"
+                                onChange={formik.handleChange}
+                                value={formik.values.confirmPassword}
+                            />
+                            { formik.errors.confirmPassword ? <div className="invalid-feedback d-block">{ formik.errors.confirmPassword }</div> : null }
+                        </div>
+                        { formik.errors.server_error ? <div className="alert alert-warning">{ formik.errors.server_error }</div> : null }
+                        <button type="submit" className="btn btn-primary">Register</button>
+                        <p><Link to="/login">Go to Login</Link></p>
+                    </form>
+                </div>
             </div>
-            <div className="form-group">
-                <label htmlFor="inputEmail">Email address</label>
-                <input type="email" 
-                    className="form-control"
-                    name='email'
-                    id="inputEmail"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter email"
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                />
-                { formik.errors.email ? <div className="invalid-feedback d-block">{ formik.errors.email }</div> : null }
-            </div>
-            <div className="form-group">
-                <label htmlFor="inputPassword">Password</label>
-                <input type="password"
-                    className="form-control"
-                    name='password'
-                    id="inputPassword"
-                    placeholder="Password"
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                />
-                { formik.errors.password ? <div className="invalid-feedback d-block">{ formik.errors.password }</div> : null }
-            </div>
-            <div className="form-group">
-                <label htmlFor="inputConfirmPassword">Confirm password</label>
-                <input type="password"
-                    className="form-control"
-                    name='confirmPassword'
-                    id="inputConfirmPassword"
-                    placeholder="Confirm password"
-                    onChange={formik.handleChange}
-                    value={formik.values.confirmPassword}
-                />
-                { formik.errors.confirmPassword ? <div className="invalid-feedback d-block">{ formik.errors.confirmPassword }</div> : null }
-            </div>
-            { formik.errors.server_error ? <div className="alert alert-warning">{ formik.errors.server_error }</div> : null }
-            <button type="submit" className="btn btn-primary">Register</button>
-            <p><Link to="/login">Go to Login</Link></p>
-        </form>
+        </>
     )
 }
 

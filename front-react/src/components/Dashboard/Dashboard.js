@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, Switch, Route } from "react-router-dom"
-import Navbar from '../Navbar/Navbar'
 import Form from './Form/Form'
 import Chart from './Chart/Chart'
 import AnswerForm from './AnswerForm/AnswerForm'
@@ -11,7 +10,6 @@ function Dashboard() {
 
     return (
         <>
-            <Navbar/>
             <div>
                 <header className="page-header">
                     <nav>
