@@ -20,7 +20,7 @@ function Dashboard() {
                         </button>
                         <ul className="admin-menu">
                             <li className="menu-heading">
-                                <h3>Admin</h3>
+                                <h3>Administration</h3>
                             </li>
                             <li>
                                 <Link to="/dashboard/chart">

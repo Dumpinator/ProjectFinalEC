@@ -1,13 +1,11 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 function Login() {
     
     let history = useHistory()
-    //let location = useLocation()
-    //let { from } = location.state || { from: { pathname: "/dashboard/charts" } }
     
     const initialValues = {
         email: '',
