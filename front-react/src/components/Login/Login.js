@@ -13,16 +13,6 @@ function Login() {
         password: ''
     }
 
-    /*
-    useEffect(() => {
-        let isMounted = true; // note this flag denote mount status
-        someAsyncOperation().then(data => {
-            if (isMounted) setState(data);
-        })
-        return () => { isMounted = false }; // use effect cleanup to set flag false, if unmounted
-    });
-    */
-
     const onSubmit = async values => {
         //console.log('Form data', values)
         axios.post('http://127.0.0.1:8000/api/login', values)

@@ -12,7 +12,7 @@ function QuestionFactory({question, handleChangeValue}) {
                 <div className="form-group">
                     <label className="float-right">{ question.id } sur 20</label>
                     <label className="questions-label" htmlFor="exampleFormControlInput1">{ question.label }</label>
-                    <input onChange={(e) => handleChangeValue(e)} type={ question.id === 2 ? 'number' : 'text' } className="form-control" id={ question.id } name={ question.id } placeholder=""/>
+                    <input onChange={(e) => handleChangeValue(e)} type={question.id === 2 ? 'number' : 'text'} className="form-control" id={question.id} name={question.id} required/>
                 </div>
                 <hr className="my-4" style={{ backgroundColor: '#0093E9' }}/>
             </>
@@ -23,7 +23,7 @@ function QuestionFactory({question, handleChangeValue}) {
                 <div className="form-group">
                     <label className="float-right">{ question.id } sur 20</label>
                     <label className="questions-label" htmlFor="exampleFormControlSelect1">{ question.label }</label>
-                    <select size={3} onChange={(e) => handleChangeValue(e)} className="form-control" id={ question.id }>
+                    <select size={3} onChange={(e) => handleChangeValue(e)} className="form-control" id={question.id} required>
                         { option?.map( (item, i) => <option key={i} value={ item }>{ item }</option> ) }
                     </select>
                 </div>
@@ -37,7 +37,7 @@ function QuestionFactory({question, handleChangeValue}) {
                 <div className="form-group">
                     <label className="float-right">{ question.id } sur 20</label>
                     <label className="questions-label" htmlFor="exampleFormControlSelect2">{ question.label }</label>
-                    <select size={5} onChange={(e) => handleChangeValue(e)} className="form-control" id={ question.id }>
+                    <select size={5} onChange={(e) => handleChangeValue(e)} className="form-control" id={question.id} required>
                         { option?.map( (item, i) => <option key={i} value={i+1}>{ item }</option> ) }
                     </select>
                 </div>
