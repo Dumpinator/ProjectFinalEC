@@ -16,7 +16,7 @@ function FormList() {
         const fetachData = async () => {
             axios.get(`http://localhost:8000/api/form`)
                 .then(res => {
-                    console.log('LOG : ', res.data)
+                    //console.log('LOG : ', res.data)
                     setFetchData(res.data)
                 })
                 .catch(err => console.log(err.response))
@@ -34,7 +34,7 @@ function FormList() {
             history.push(`/success/${res.data[1].url}`)
         })
         .catch(err => {
-            //console.log(err.response.data);
+            console.log(err.response.data);
             if (err.response.data.message)
                 setErrors({ server_error: 'Erreur MySQL'})
             else 
@@ -52,11 +52,11 @@ function FormList() {
             <form onSubmit={handleSubmit} className="form-div">
                 { 
                     fetchData.map( (question, i) => 
-                        <QuestionFactory
-                            question={question}
-                            handleChangeValue={handleChangeValue}
-                            key={i}
-                        /> 
+                            <QuestionFactory
+                                question={question}
+                                handleChangeValue={handleChangeValue}
+                                key={i}
+                            />
                     )
                 }
                 <div className="text-center">

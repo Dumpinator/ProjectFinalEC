@@ -7,7 +7,11 @@ function Form() {
     return (
         <>  
             <div className="container">
-                <FormList />
+                <div className="jumbotron" style={{ backgroundColor: '#fff', margin: '2em' }}>
+                    <h1 className="display-4">BIGSCREEN</h1>
+                    <p className="lead">Merci de répondre à toutes les questions et de valider le formulaire en bas de la page.</p>
+                    <FormList />
+                </div>
             </div>
         </>
     )

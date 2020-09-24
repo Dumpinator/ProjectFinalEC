@@ -7,11 +7,21 @@ import './Login.css'
 function Login() {
     
     let history = useHistory()
-    const [, setRedirect] = useState([false])
+    const [reDirect, setRedirect] = useState(false)
     const initialValues = {
         email: '',
         password: ''
     }
+
+    /*
+    useEffect(() => {
+        let isMounted = true; // note this flag denote mount status
+        someAsyncOperation().then(data => {
+            if (isMounted) setState(data);
+        })
+        return () => { isMounted = false }; // use effect cleanup to set flag false, if unmounted
+    });
+    */
 
     const onSubmit = async values => {
         //console.log('Form data', values)
@@ -19,9 +29,10 @@ function Login() {
             .then(res => {
                 //console.log('Connexion Réussi');
                 //console.log(res.data)
+                console.log(reDirect)
                 localStorage.setItem('token', res.data.remember_token)
+                setRedirect(true)
                 history.push('/dashboard/chart')
-                setRedirect([null])
             })
             .catch(err => {
                 //console.log(err.response.data.errors);
