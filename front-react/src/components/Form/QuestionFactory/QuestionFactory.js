@@ -7,16 +7,31 @@ function QuestionFactory({question, handleChangeValue}) {
     const option = question.option?.split(',')
 
     if (type === 'B')
-        return (
-            <>
-                <div className="form-group">
-                    <label className="float-right">{ question.id } sur 20</label>
-                    <label className="questions-label" htmlFor="exampleFormControlInput1">{ question.label }</label>
-                    <input onChange={(e) => handleChangeValue(e)} type={question.id === 2 ? 'number' : 'text'} className="form-control" id={question.id} name={question.id} required/>
-                </div>
-                <hr className="my-4" style={{ backgroundColor: '#0093E9' }}/>
-            </>
-        )
+        
+    if (question.id === 20) {
+            return (
+                <>
+                    <div className="form-group">
+                        <label className="float-right">{question.id} sur 20</label>
+                        <label className="questions-label" htmlFor="exampleFormControlInput1">{question.label}</label>
+                        
+                        <textarea onChange={(e) => handleChangeValue(e)} type={'text'} className="form-control" id={question.id} rows="3" required maxLength="170"></textarea>
+                    </div>
+                    <hr className="my-4" style={{ backgroundColor: '#0093E9' }} />
+                </>
+            )
+        }
+        else
+            return (
+                <>
+                    <div className="form-group">
+                        <label className="float-right">{ question.id } sur 20</label>
+                        <label className="questions-label" htmlFor="exampleFormControlInput1">{ question.label }</label>
+                        <input onChange={(e) => handleChangeValue(e)} type={question.id === 2 ? 'number' : 'text'} className="form-control" id={question.id} name={question.id} required maxLength="170" />
+                    </div>
+                    <hr className="my-4" style={{ backgroundColor: '#0093E9' }}/>
+                </>
+            )
     else if (type === 'A') {
         return (
             <>

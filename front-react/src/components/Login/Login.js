@@ -1,35 +1,30 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useFormik } from 'formik'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
+import Navbar from '../../components/Navbar/Navbar'
 import './Login.css'
 
 function Login() {
-    
+
     let history = useHistory()
-    const [reDirect, setRedirect] = useState(false)
+
     const initialValues = {
         email: '',
         password: ''
     }
 
-    const onSubmit = async values => {
+    const onSubmit = values => {
         //console.log('Form data', values)
         axios.post('http://127.0.0.1:8000/api/login', values)
             .then(res => {
-                //console.log('Connexion Réussi');
-                //console.log(res.data)
-                console.log(reDirect)
                 localStorage.setItem('token', res.data.remember_token)
-                setRedirect(true)
-                history.push('/dashboard/chart')
+                history.push("/dashboard/chart")
             })
             .catch(err => {
                 //console.log(err.response.data.errors);
-                if(err.response.status === 401) {
-                    formik.setErrors({ server_error : err.response.data.errors })
-                }
-        })
+                formik.setErrors({ server_error : err.response.data.errors })
+            })
     }
 
     const validate = values => {
@@ -57,6 +52,7 @@ function Login() {
 
     return (
         <>
+            <Navbar />
             <div className="page-login">
                 <div className="login">
                     <form onSubmit={formik.handleSubmit} noValidate>

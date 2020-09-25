@@ -36,19 +36,25 @@ function Answers() {
     return (
         <>
             <Navbar/>
-            <div className="jumbotron">
-                <h1 className="display-4">answers</h1>
-                <p>{url}</p>
+            <div className="container">
+                <div className="jumbotron" style={{ backgroundColor: '#fff', margin: '2em' }}>
+                    <h1 className="display-4">Vos réponses</h1>
+                        <div className="answers-content">
+                            {   fetchData.map((questions, i) =>
+                                <AnswersFactory
+                                    question={questions}
+                                    answer={userData}
+                                    key={i}
+                                />)
+                            }
+                    </div>
+                </div>
             </div>
-            { fetchData.map((questions, i) =>
-                <AnswersFactory 
-                    question={questions}
-                    answer={userData}
-                    key={i}
-                />)
-            }
         </>
     )
 }
+
+
+
 
 export default Answers

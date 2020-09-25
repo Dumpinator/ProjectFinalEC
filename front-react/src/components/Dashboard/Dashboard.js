@@ -5,6 +5,7 @@ import Chart from './Chart/Chart'
 import AnswerForm from './AnswerForm/AnswerForm'
 import { FcPieChart, FcSurvey, FcAcceptDatabase } from 'react-icons/fc';
 import './Dashboard.css'
+import Navbar from '../Navbar/Navbar'
 
 function Dashboard() {
 
@@ -13,7 +14,6 @@ function Dashboard() {
             <div>
                 <header className="page-header">
                     <nav>
-                        <h3>Bigscreen</h3>
                         <button className="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
                         </button>
                         <ul className="admin-menu">
@@ -45,6 +45,7 @@ function Dashboard() {
                         </ul>
                     </nav>
                 </header>
+                <Navbar />
                 <Switch>
                     <Route path="/dashboard/chart" component={Chart} />
                     <Route path="/dashboard/form" component={Form} />

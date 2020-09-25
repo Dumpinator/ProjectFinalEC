@@ -2,6 +2,7 @@ import React from 'react'
 import { useFormik } from 'formik'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
+import Navbar from '../../components/Navbar/Navbar'
 import './Register.css'
 
 function Register() {
@@ -20,15 +21,11 @@ function Register() {
             .then(res => {
                 //console.log('POST Réussi');
                 console.log(res.data)
-                history.push("/dashboard");
+                history.push("/login");
             })
             .catch(err => {
                 console.log(err.response.message)
-                /*
-                if(err.response.status === 401) {
-                    formik.setErrors({ server_error : err.response.data.errors })
-                }
-                */
+                formik.setErrors({ server_error : err.response.data.errors })
             })
     }
 
@@ -65,6 +62,7 @@ function Register() {
 
     return (
         <>
+            <Navbar />
             <div className="page-register">
                 <div className="register">
                     <form onSubmit={formik.handleSubmit}>

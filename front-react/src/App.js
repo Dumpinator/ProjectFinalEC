@@ -8,7 +8,6 @@ import Dashboard from './components/Dashboard/Dashboard'
 import Success from './components/Success/Success'
 import Login from './components/Login/Login'
 import PrivateRoute from './routes/PrivateRoute'
-import Navbar from './components/Navbar/Navbar'
 import './App.css'
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
   return (
     <div className="App">
         <Router>
-          <Navbar />
           <Switch>
             <Route exact path="/" component={ Home } />
             <Route path="/form" component={ Form } />

@@ -1,0 +1,43 @@
+.form-div {
+    padding: 2em;
+    margin: 2em 5em 0 5em;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+.form-div > .form-group {
+    margin: 2em 1em;
+    padding: 2em 1em;
+    border-radius: 15px;
+}
+
+.answers-row {
+    margin: 1em;
+}
+
+.answers-row > div {
+    padding: .4em;
+    border-radius: 10px 10px 0 0;
+    background-color: silver;
+}
+
+.answers-row > div:last-child {
+    border-radius: 0 0 10px 10px;
+    padding: 0 .4em .4em .4em;
+}
+/* inputs answers */
+.answers-row > div > div {
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #fff;
+    border: silver 2px solid
+}
+.answers-row > div > .test {
+    border-right: .4em solid silver;
+    border-radius: 10px 0px 0px 10px;
+}
+.answers-row > div > div:nth-child(2) {
+    border-left: .4em solid silver;
+    border-radius: 0px 10px 10px 0px;
+}

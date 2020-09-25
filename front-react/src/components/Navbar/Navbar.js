@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from "react-router-dom"
+import { Link, useHistory, useRouteMatch } from "react-router-dom"
 
 function Navbar() {
 
     let history = useHistory()
+    let match = useRouteMatch("/dashboard/*");
     const [, removeToken] = useState(false)
     const logout = () => {
         localStorage.clear()
@@ -23,14 +24,25 @@ function Navbar() {
                     {
                         localStorage.getItem('token')
                         ?
-                        <>
-                            <li className="nav-item active">
-                                <button className="nav-btn" onClick={logout}>Déconnexion</button>
-                            </li>
-                        </>
+                            match
+                            ?
+                            <>
+                                <li className="nav-item">
+                                        <Link className="nav-link active" onClick={logout} to="/">Déconnexion</Link>
+                                </li>
+                            </>
+                            :
+                            <>
+                                <li className="nav-item">
+                                        <Link className="nav-link" to="/dashboard/chart">Dashboard</Link>
+                                </li>
+                                <li className="nav-item">
+                                        <Link className="nav-link active" onClick={logout} to="/">Déconnexion</Link>
+                                </li>
+                            </>
                         :
                         <>
-                            <li className="nav-item active">
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/form">Formulaire</Link>
                             </li>
                             <li className="nav-item">

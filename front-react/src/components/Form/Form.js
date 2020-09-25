@@ -1,11 +1,13 @@
 import React from 'react'
 import FormList from './FormList/FormList'
+import Navbar from '../../components/Navbar/Navbar'
 import './Form.css'
 
 function Form() {
 
     return (
         <>  
+            <Navbar />
             <div className="container">
                 <div className="jumbotron" style={{ backgroundColor: '#fff', margin: '2em' }}>
                     <h1 className="display-4">BIGSCREEN</h1>

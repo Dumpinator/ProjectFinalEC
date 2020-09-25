@@ -1,12 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { BiTimer } from 'react-icons/bi'
+import Navbar from '../../components/Navbar/Navbar'
 import './Home.css'
 
 function Home() {
 
     return (
         <>
+            <Navbar />
             <div className="page-home">
                 <div className="home">
                     <div className="jumbotron" style={{ backgroundColor: '#fff', margin: '2em'}}>

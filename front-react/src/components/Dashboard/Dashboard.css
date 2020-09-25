@@ -73,7 +73,6 @@ body {
   padding-top: 20px;
   width: var(--page-header-width);
   color: var(--page-header-txtColor);
-  background: var(--page-header-bgColor);
 }
 
 /*In case you prefer an absolutely positioned header that covers the full page height, add these styles*/
@@ -140,7 +139,7 @@ body {
   letter-spacing: 0.15em;
   font-size: 12px;
   margin-top: 12px;
-  color: var(--page-header-headingColor);
+  color: #FFF;
 }
 
 .page-header .admin-menu svg {
