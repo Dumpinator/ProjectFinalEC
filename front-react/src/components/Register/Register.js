@@ -18,15 +18,14 @@ function Register() {
     const onSubmit = values => {
         console.log('Form data', values);
         axios.post('http://127.0.0.1:8000/api/register', values)
-            .then(res => {
-                //console.log('POST Réussi');
-                console.log(res.data)
-                history.push("/login");
-            })
-            .catch(err => {
-                console.log(err.response.message)
-                formik.setErrors({ server_error : err.response.data.errors })
-            })
+        .then(res => {
+            console.log(res.data)
+            history.push("/login");
+        })
+        .catch(err => {
+            console.log(err.response.message)
+            formik.setErrors({ server_error : err.response.data.errors })
+        })
     }
 
     const validate = values => {
